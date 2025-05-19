@@ -34,5 +34,25 @@
     "type": "image/png",
     "purpose": "maskable"
   }
+],
+"screenshots": [
+  {
+    "src": "screenshots/StoryApp_001.png",
+    "sizes": "1280x720",
+    "type": "image/png",
+    "form_factor": "narrow"
+  },
+  {
+    "src": "screenshots/StoryApp_002.png",
+    "sizes": "1280x720",
+    "type": "image/png",
+    "form_factor": "narrow"
+  },
+    {
+    "src": "screenshots/StoryApp_003.png",
+    "sizes": "1280x720",
+    "type": "image/png",
+    "form_factor": "narrow"
+  }
 ]
 }
