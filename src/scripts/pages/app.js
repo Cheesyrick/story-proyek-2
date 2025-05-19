@@ -52,6 +52,8 @@ class App {
 
   async renderPage() {
     const url = getActiveRoute();
+console.log("➡️ Active Route:", url);
+console.log("➡️ Available routes:", Object.keys(routes));
     const page = routes[url];
 
     if (
