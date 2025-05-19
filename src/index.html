@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <title>App</title>
+
+    <link rel="manifest" href="manifest.json" />
+  </head>
+
+  <body>
+    <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+
+    <header>
+      <div class="main-header container">
+        <a class="brand-name" href="#/">App</a>
+
+        <nav id="navigation-drawer" class="navigation-drawer">
+          <ul id="nav-list" class="nav-list">
+            <li><a href="#/">Beranda</a></li>
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/add">Tambah Cerita</a></li>
+            <li><a href="#/login">Masuk</a></li>
+            <li><a href="#/register">Daftar</a></li>
+            <li><a href="#" id="logout-link">Logout</a></li>
+          </ul>
+        </nav>
+        <button
+          id="drawer-button"
+          class="drawer-button"
+          aria-label="Buka navigasi"
+        >
+          ☰
+        </button>
+              <div id="push-notification-tools" class="push-tools"></div>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-content" tabindex="-1"></main>
+  </body>
+</html>
