@@ -1,4 +1,3 @@
-// File: src/scripts/data/api.js
 import CONFIG from "../config";
 
 export async function getAllStories(token) {
@@ -67,7 +66,10 @@ export async function login(data) {
   return await response.json();
 }
 
-export async function subscribePushNotification({ endpoint, keys: { p256dh, auth } }) {
+export async function subscribePushNotification({
+  endpoint,
+  keys: { p256dh, auth },
+}) {
   const accessToken = localStorage.getItem("token");
   const data = JSON.stringify({
     endpoint,
@@ -78,7 +80,7 @@ export async function subscribePushNotification({ endpoint, keys: { p256dh, auth
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
     },
     body: data,
   });
@@ -99,7 +101,7 @@ export async function unsubscribePushNotification({ endpoint }) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
     },
     body: data,
   });

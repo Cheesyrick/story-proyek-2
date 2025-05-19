@@ -26,9 +26,9 @@ const RegisterPage = {
 
   async afterRender() {
     const presenter = new RegisterPresenter(this);
-    const form = document.getElementById('register-form');
+    const form = document.getElementById("register-form");
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const name = form.name.value;
       const email = form.email.value;
@@ -38,15 +38,15 @@ const RegisterPage = {
   },
 
   showError(message) {
-    const errorContainer = document.getElementById('register-error');
-    errorContainer.style.display = 'block';
+    const errorContainer = document.getElementById("register-error");
+    errorContainer.style.display = "block";
     errorContainer.textContent = message;
   },
 
   onRegisterSuccess() {
-    alert('Registrasi berhasil! Silakan login.');
-    window.location.hash = '#/login';
-  }
+    alert("Registrasi berhasil! Silakan login.");
+    window.location.hash = "#/login";
+  },
 };
 
 export default RegisterPage;

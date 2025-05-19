@@ -1,8 +1,8 @@
 // Update to HomePage to support Bookmark toggle
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import markerIconUrl from 'leaflet/dist/images/marker-icon.png';
-import markerShadowUrl from 'leaflet/dist/images/marker-shadow.png';
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import markerIconUrl from "leaflet/dist/images/marker-icon.png";
+import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
 
 const DefaultIcon = L.icon({
   iconUrl: markerIconUrl,
@@ -44,39 +44,43 @@ export default class HomePage {
       return;
     }
 
-stories.forEach(async (story) => {
-  const isBookmarked = await this.presenter.isStoryBookmarked(story.id);
-  
-  const item = document.createElement("article");
-  item.classList.add("story-item");
-  item.innerHTML = `
+    stories.forEach(async (story) => {
+      const isBookmarked = await this.presenter.isStoryBookmarked(story.id);
+
+      const item = document.createElement("article");
+      item.classList.add("story-item");
+      item.innerHTML = `
     <h2>${story.name}</h2>
     <img src="${story.photoUrl}" alt="${story.description}" width="250" />
     <p><strong>Deskripsi:</strong> ${story.description}</p>
-    <p><strong>Tanggal:</strong> ${new Date(story.createdAt).toLocaleDateString()}</p>
+    <p><strong>Tanggal:</strong> ${new Date(
+      story.createdAt
+    ).toLocaleDateString()}</p>
     <p><strong>Koordinat:</strong> ${story.lat}, ${story.lon}</p>
-    <button class="bookmark-btn" data-id="${story.id}" ${isBookmarked ? "disabled" : ""}>
+    <button class="bookmark-btn" data-id="${story.id}" ${
+        isBookmarked ? "disabled" : ""
+      }>
       ${isBookmarked ? "Bookmarked" : "Bookmark"}
     </button>
   `;
-  container.appendChild(item);
+      container.appendChild(item);
 
-  if (!isBookmarked) {
-    item.querySelector('.bookmark-btn').addEventListener('click', () => {
-      this.presenter.saveStory(story);
-      item.querySelector('.bookmark-btn').textContent = "Bookmarked";
-      item.querySelector('.bookmark-btn').disabled = true;
+      if (!isBookmarked) {
+        item.querySelector(".bookmark-btn").addEventListener("click", () => {
+          this.presenter.saveStory(story);
+          item.querySelector(".bookmark-btn").textContent = "Bookmarked";
+          item.querySelector(".bookmark-btn").disabled = true;
+        });
+      }
     });
-  }
-});
 
-container.querySelectorAll('.bookmark-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const storyId = e.target.dataset.id;
-    const story = stories.find(s => s.id === storyId);
-    this.presenter.saveStory(story);
-  });
-});
+    container.querySelectorAll(".bookmark-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const storyId = e.target.dataset.id;
+        const story = stories.find((s) => s.id === storyId);
+        this.presenter.saveStory(story);
+      });
+    });
 
     const map = L.map("map").setView([-2.5489, 118.0149], 5);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {

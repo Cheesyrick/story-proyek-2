@@ -28,11 +28,11 @@ export default class HomePagePresenter {
     }
   }
   async isStoryBookmarked(id) {
-  try {
-    const story = await Database.getStoryById(id);
-    return !!story;
-  } catch {
-    return false;
+    try {
+      const story = await Database.getStoryById(id);
+      return !!story;
+    } catch {
+      return false;
+    }
   }
-}
 }

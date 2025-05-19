@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'token';
+const TOKEN_KEY = "token";
 
 export async function login({ email, password }) {
   const response = await fetch("https://story-api.dicoding.dev/v1/login", {

@@ -1,20 +1,25 @@
-// File: src/scripts/utils/notification-helper.js
-import { convertBase64ToUint8Array } from './index';
-import { VAPID_PUBLIC_KEY } from '../config';
-import { subscribePushNotification, unsubscribePushNotification } from '../data/api';
-import { generateSubscribeButtonTemplate, generateUnsubscribeButtonTemplate } from '../template';
+import { convertBase64ToUint8Array } from "./index";
+import { VAPID_PUBLIC_KEY } from "../config";
+import {
+  subscribePushNotification,
+  unsubscribePushNotification,
+} from "../data/api";
+import {
+  generateSubscribeButtonTemplate,
+  generateUnsubscribeButtonTemplate,
+} from "../template";
 
 export function isNotificationAvailable() {
-  return 'Notification' in window;
+  return "Notification" in window;
 }
 
 export function isNotificationGranted() {
-  return Notification.permission === 'granted';
+  return Notification.permission === "granted";
 }
 
 export async function requestNotificationPermission() {
   if (!isNotificationAvailable()) {
-    console.error('Notification API unsupported.');
+    console.error("Notification API unsupported.");
     return false;
   }
 
@@ -24,13 +29,13 @@ export async function requestNotificationPermission() {
 
   const status = await Notification.requestPermission();
 
-  if (status === 'denied') {
-    alert('Izin notifikasi ditolak.');
+  if (status === "denied") {
+    alert("Izin notifikasi ditolak.");
     return false;
   }
 
-  if (status === 'default') {
-    alert('Izin notifikasi ditutup atau diabaikan.');
+  if (status === "default") {
+    alert("Izin notifikasi ditutup atau diabaikan.");
     return false;
   }
 
@@ -57,24 +62,26 @@ export async function subscribe() {
   if (!(await requestNotificationPermission())) return;
 
   if (await isCurrentPushSubscriptionAvailable()) {
-    alert('Sudah berlangganan push notification.');
+    alert("Sudah berlangganan push notification.");
     return;
   }
 
-  const failureMessage = 'Langganan push notification gagal diaktifkan.';
-  const successMessage = 'Langganan push notification berhasil diaktifkan.';
+  const failureMessage = "Langganan push notification gagal diaktifkan.";
+  const successMessage = "Langganan push notification berhasil diaktifkan.";
 
   let pushSubscription = null;
 
   try {
     const registration = await navigator.serviceWorker.getRegistration();
-    pushSubscription = await registration.pushManager.subscribe(generateSubscribeOptions());
+    pushSubscription = await registration.pushManager.subscribe(
+      generateSubscribeOptions()
+    );
 
     const { endpoint, keys } = pushSubscription.toJSON();
     const response = await subscribePushNotification({ endpoint, keys });
 
     if (!response.ok) {
-      console.error('subscribe: response:', response);
+      console.error("subscribe: response:", response);
       alert(failureMessage);
       await pushSubscription.unsubscribe();
       return;
@@ -82,7 +89,7 @@ export async function subscribe() {
 
     alert(successMessage);
   } catch (error) {
-    console.error('subscribe: error:', error);
+    console.error("subscribe: error:", error);
     alert(failureMessage);
 
     if (pushSubscription) await pushSubscription.unsubscribe();
@@ -92,19 +99,19 @@ export async function subscribe() {
 export async function unsubscribe() {
   const subscription = await getPushSubscription();
   if (!subscription) {
-    alert('Kamu belum berlangganan notifikasi.');
+    alert("Kamu belum berlangganan notifikasi.");
     return;
   }
 
-  const failureMessage = 'Gagal berhenti langganan push notification.';
-  const successMessage = 'Berhasil berhenti langganan push notification.';
+  const failureMessage = "Gagal berhenti langganan push notification.";
+  const successMessage = "Berhasil berhenti langganan push notification.";
 
   try {
     const endpoint = subscription.endpoint;
     const response = await unsubscribePushNotification({ endpoint });
 
     if (!response.ok) {
-      console.error('unsubscribe: response:', response);
+      console.error("unsubscribe: response:", response);
       alert(failureMessage);
       return;
     }
@@ -112,7 +119,7 @@ export async function unsubscribe() {
     await subscription.unsubscribe();
     alert(successMessage);
   } catch (error) {
-    console.error('unsubscribe: error:', error);
+    console.error("unsubscribe: error:", error);
     alert(failureMessage);
   }
 }
@@ -126,14 +133,16 @@ export async function setupPushButtonUI(containerId) {
     ? generateUnsubscribeButtonTemplate()
     : generateSubscribeButtonTemplate();
 
-  const button = document.getElementById(isSubscribed ? 'unsubscribe-button' : 'subscribe-button');
+  const button = document.getElementById(
+    isSubscribed ? "unsubscribe-button" : "subscribe-button"
+  );
   if (isSubscribed) {
-    button.addEventListener('click', async () => {
+    button.addEventListener("click", async () => {
       await unsubscribe();
       setupPushButtonUI(containerId);
     });
   } else {
-    button.addEventListener('click', async () => {
+    button.addEventListener("click", async () => {
       await subscribe();
       setupPushButtonUI(containerId);
     });

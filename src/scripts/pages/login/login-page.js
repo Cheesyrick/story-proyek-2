@@ -23,9 +23,9 @@ const LoginPage = {
 
   async afterRender() {
     const presenter = new LoginPresenter(this);
-    const form = document.getElementById('login-form');
+    const form = document.getElementById("login-form");
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = form.email.value;
       const password = form.password.value;
@@ -34,10 +34,10 @@ const LoginPage = {
   },
 
   showError(message) {
-    const errorContainer = document.getElementById('login-error');
-    errorContainer.style.display = 'block';
+    const errorContainer = document.getElementById("login-error");
+    errorContainer.style.display = "block";
     errorContainer.textContent = message;
-  }
+  },
 };
 
 export default LoginPage;

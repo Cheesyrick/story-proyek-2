@@ -1,4 +1,3 @@
-
 export function generateSubscribeButtonTemplate() {
   return `
     <button id="subscribe-button" class="btn subscribe-button">

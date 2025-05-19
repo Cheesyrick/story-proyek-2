@@ -1,5 +1,5 @@
 // File: src/scripts/presenter/bookmark-presenter.js
-import BookmarkPageModel from '../model/bookmark-model';
+import BookmarkPageModel from "../model/bookmark-model";
 
 export default class BookmarkPagePresenter {
   constructor({ view }) {
@@ -24,10 +24,10 @@ export default class BookmarkPagePresenter {
   async removeBookmark(storyId) {
     try {
       await this.model.removeStory(storyId);
-      this.view.showMessage('Cerita berhasil dihapus dari bookmark.');
+      this.view.showMessage("Cerita berhasil dihapus dari bookmark.");
       await this.loadBookmarkedStories();
     } catch (error) {
-      this.view.showError('Gagal menghapus cerita: ' + error.message);
+      this.view.showError("Gagal menghapus cerita: " + error.message);
     }
   }
 }

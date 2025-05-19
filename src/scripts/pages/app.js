@@ -1,11 +1,13 @@
-// File: src/scripts/app.js
 import routes from "../routes/routes";
 import logout from "../utils/logout.js";
 import { getActiveRoute } from "../routes/url-parser";
 import { shouldSkipToContent, clearSkipFlag } from "../index.js";
-import { generateSubscribeButtonTemplate, generateUnsubscribeButtonTemplate } from "../template.js";
+import {
+  generateSubscribeButtonTemplate,
+  generateUnsubscribeButtonTemplate,
+} from "../template.js";
 import { isServiceWorkerAvailable } from "../utils/index.js";
-import { setupPushButtonUI } from '../utils/notification-helper';
+import { setupPushButtonUI } from "../utils/notification-helper";
 
 function supportsViewTransition() {
   return typeof document.startViewTransition === "function";
@@ -47,13 +49,13 @@ class App {
   }
 
   async #setupPushNotification() {
-    await setupPushButtonUI('push-notification-tools');
+    await setupPushButtonUI("push-notification-tools");
   }
 
   async renderPage() {
     const url = getActiveRoute();
-console.log("➡️ Active Route:", url);
-console.log("➡️ Available routes:", Object.keys(routes));
+    console.log("➡️ Active Route:", url);
+    console.log("➡️ Available routes:", Object.keys(routes));
     const page = routes[url];
 
     if (
@@ -65,7 +67,7 @@ console.log("➡️ Available routes:", Object.keys(routes));
 
     const renderContent = async () => {
       this.#content.classList.add("transition-view-exit");
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       this.#content.innerHTML = await page.render();
       await page.afterRender();
 
@@ -98,7 +100,7 @@ console.log("➡️ Available routes:", Object.keys(routes));
       await document.startViewTransition(renderContent).finished;
     } else {
       this.#content.classList.add("transition-leave");
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       this.#content.classList.remove("transition-leave");
       await renderContent();
       this.#content.classList.add("transition-enter");

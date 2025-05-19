@@ -1,4 +1,4 @@
-import { login } from '../model/login-model.js';
+import { login } from "../model/login-model.js";
 
 class LoginPresenter {
   constructor(view) {
@@ -8,11 +8,13 @@ class LoginPresenter {
   async handleLogin(email, password) {
     try {
       await login({ email, password });
-      window.location.hash = '/';
+      window.location.hash = "/";
     } catch (error) {
-      const message = error.message.includes('401') || error.message.toLowerCase().includes('unauthorized')
-        ? 'Email atau password salah. Silakan coba lagi.'
-        : 'Terjadi kesalahan saat login.';
+      const message =
+        error.message.includes("401") ||
+        error.message.toLowerCase().includes("unauthorized")
+          ? "Email atau password salah. Silakan coba lagi."
+          : "Terjadi kesalahan saat login.";
       this.view.showError(message);
     }
   }

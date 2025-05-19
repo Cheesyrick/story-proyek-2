@@ -1,12 +1,11 @@
-// File: src/scripts/model/bookmark-page-model.js
-import Database from '../data/database.js';
+import Database from "../data/database.js";
 
 export default class BookmarkPageModel {
   async getAllBookmarkedStories() {
     try {
       return await Database.getAllStories();
     } catch (error) {
-      throw new Error('Gagal mengambil cerita tersimpan');
+      throw new Error("Gagal mengambil cerita tersimpan");
     }
   }
 
@@ -14,7 +13,7 @@ export default class BookmarkPageModel {
     try {
       await Database.deleteStory(id);
     } catch (error) {
-      throw new Error('Gagal menghapus cerita');
+      throw new Error("Gagal menghapus cerita");
     }
   }
 

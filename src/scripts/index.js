@@ -1,6 +1,6 @@
 import "../styles/styles.css";
 import App from "./pages/app";
-import { registerServiceWorker } from './utils';
+import { registerServiceWorker } from "./utils";
 
 let skipToContentFlag = false;
 
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await app.renderPage();
   await registerServiceWorker();
-  console.log('Berhasil mendaftarkan service worker.');
+  console.log("Berhasil mendaftarkan service worker.");
   window._appInstance = app;
 
   const skipLink = document.querySelector(".skip-link");

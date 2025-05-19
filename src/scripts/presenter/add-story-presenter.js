@@ -10,11 +10,11 @@ class AddStoryPresenter {
 
   async handleSubmit(description, photo, lat, lon) {
     try {
-      const result = await this.model.submitStory({ 
-        description, 
-        photo, 
-        lat, 
-        lon 
+      const result = await this.model.submitStory({
+        description,
+        photo,
+        lat,
+        lon,
       });
 
       await this.notifyUser(description);
