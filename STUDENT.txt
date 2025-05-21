@@ -1,1 +1,1 @@
-APP_URL=https://drianappstory.netlify.app/
+APP_URL=https://drianreupappstory.netlify.app/
