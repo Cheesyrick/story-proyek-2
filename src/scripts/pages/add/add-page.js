@@ -76,19 +76,27 @@ const AddStoryPage = {
     }
 
     captureBtn.addEventListener("click", () => {
-      canvas.width = camera.videoWidth;
-      canvas.height = camera.videoHeight;
+      const scaleFactor = 0.3;
+      const resizedWidth = camera.videoWidth * scaleFactor;
+      const resizedHeight = camera.videoHeight * scaleFactor;
+
+      canvas.width = resizedWidth;
+      canvas.height = resizedHeight;
+
       const ctx = canvas.getContext("2d");
-      ctx.drawImage(camera, 0, 0, canvas.width, canvas.height);
-      const photoDataUrl = canvas.toDataURL("image/png");
+      ctx.drawImage(camera, 0, 0, resizedWidth, resizedHeight);
+
+      const photoDataUrl = canvas.toDataURL("image/jpeg", 0.7);
       resultPhoto.src = photoDataUrl;
       resultPhoto.style.display = "block";
 
       const imageBlob = this.dataURLToBlob(photoDataUrl);
-      const file = new File([imageBlob], "photo.png", { type: "image/png" });
+      const file = new File([imageBlob], "photo.jpg", { type: "image/jpeg" });
+      console.log("Ukuran file setelah resize:", file.size / 1024, "KB");
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(file);
       photoInput.files = dataTransfer.files;
+
       camera.style.display = "none";
     });
 
